@@ -1,0 +1,17 @@
+name: bs-skills
+version: 1.0.0
+description: APM project for bs-skills
+author: Cody Kingham
+# Which agent platforms to deploy to.
+# Resolution order: --target flag > this field > auto-detect from filesystem.
+# Accepted values: agent-skills, antigravity, claude, codex, copilot, cursor, gemini, grok-bot, grok-build, hermes, kiro, opencode, vscode, windsurf
+targets:
+  - codex
+  - claude
+dependencies:
+  apm:
+    - microsoft/apm/packages/apm-guide/.apm/skills/apm-usage#main
+    - mattpocock/skills/skills/productivity/writing-for-agents
+  mcp: []
+includes: auto
+scripts: {}
