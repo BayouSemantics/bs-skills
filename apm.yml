@@ -12,6 +12,7 @@ dependencies:
   apm:
     - microsoft/apm/packages/apm-guide/.apm/skills/apm-usage#main
     - mattpocock/skills/skills/productivity/writing-for-agents
+    - bayousemantics/bs-skills/skills/skills-standard
   mcp: []
 includes: auto
 scripts: {}

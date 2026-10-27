@@ -1,6 +1,23 @@
 lockfile_version: '1'
 apm_version: 0.35.0
 dependencies:
+- repo_url: bayousemantics/bs-skills
+  name: skills-standard
+  host: github.com
+  resolved_commit: 300ea566aef545d04c3cab9a2b8d40b6d60969fa
+  version: unknown
+  virtual_path: skills/skills-standard
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/skills-standard
+  - .agents/skills/skills-standard/SKILL.md
+  - .claude/skills/skills-standard
+  - .claude/skills/skills-standard/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/skills-standard/SKILL.md: sha256:3654908dd4f3211312fc42f673dfcfe816f41fcd1b24e7c1f681385a2a240fb0
+    .claude/skills/skills-standard/SKILL.md: sha256:3654908dd4f3211312fc42f673dfcfe816f41fcd1b24e7c1f681385a2a240fb0
+  content_hash: sha256:575c4daf84799abd8ab58499fc0ea6b46c8ae8058804962b2ae76ac695099e36
 - repo_url: mattpocock/skills
   name: writing-for-agents
   host: github.com
@@ -169,6 +186,24 @@ deployments:
   content_hash: sha256:1bbb710fa9fd710aa2258aea52f6d905c6a2b3d366a1fdc723b028b4bfd2dbae
 - kind: project-relative
   target: claude
+  value: .claude/skills/skills-standard
+  runtime: null
+  scope: project
+  owners:
+  - bayousemantics/bs-skills/skills/skills-standard
+  active_owner: bayousemantics/bs-skills/skills/skills-standard
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/skills-standard/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - bayousemantics/bs-skills/skills/skills-standard
+  active_owner: bayousemantics/bs-skills/skills/skills-standard
+  content_hash: sha256:3654908dd4f3211312fc42f673dfcfe816f41fcd1b24e7c1f681385a2a240fb0
+- kind: project-relative
+  target: claude
   value: .claude/skills/writing-for-agents
   runtime: null
   scope: project
@@ -293,6 +328,24 @@ deployments:
   - microsoft/apm/packages/apm-guide/.apm/skills/apm-usage
   active_owner: microsoft/apm/packages/apm-guide/.apm/skills/apm-usage
   content_hash: sha256:1bbb710fa9fd710aa2258aea52f6d905c6a2b3d366a1fdc723b028b4bfd2dbae
+- kind: project-relative
+  target: codex
+  value: .agents/skills/skills-standard
+  runtime: null
+  scope: project
+  owners:
+  - bayousemantics/bs-skills/skills/skills-standard
+  active_owner: bayousemantics/bs-skills/skills/skills-standard
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/skills-standard/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - bayousemantics/bs-skills/skills/skills-standard
+  active_owner: bayousemantics/bs-skills/skills/skills-standard
+  content_hash: sha256:3654908dd4f3211312fc42f673dfcfe816f41fcd1b24e7c1f681385a2a240fb0
 - kind: project-relative
   target: codex
   value: .agents/skills/writing-for-agents
