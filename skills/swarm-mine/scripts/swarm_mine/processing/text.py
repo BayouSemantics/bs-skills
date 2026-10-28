@@ -31,9 +31,9 @@ def extract_page_text(pdf_path: Path, page_number: int) -> str:
     Returns:
         Normalized page text; empty string when the page has no text layer.
     """
-    import fitz
+    import pymupdf
 
-    with fitz.open(pdf_path) as document:
+    with pymupdf.open(pdf_path) as document:
         page = document.load_page(page_number - 1)
         return normalize_text(page.get_text())
 
@@ -47,9 +47,9 @@ def extract_all_page_texts(pdf_path: Path) -> list[str]:
     Returns:
         Normalized text per page, in 1-based page order.
     """
-    import fitz
+    import pymupdf
 
-    with fitz.open(pdf_path) as document:
+    with pymupdf.open(pdf_path) as document:
         return [normalize_text(page.get_text()) for page in document]
 
 

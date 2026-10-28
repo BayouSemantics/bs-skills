@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import fitz
+import pymupdf
 import pytest
 from swarm_mine.driver import MiningDriver
 from swarm_mine.models import ResourceInput
@@ -14,7 +14,7 @@ URL = "https://example.org/a.pdf"
 
 
 def pdf(*pages: str) -> bytes:
-    document = fitz.open()
+    document = pymupdf.open()
     for text in pages:
         page = document.new_page()
         if text:
