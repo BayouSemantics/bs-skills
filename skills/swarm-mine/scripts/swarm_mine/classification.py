@@ -45,20 +45,32 @@ class TextClassifier:
         self.model = joblib.load(workspace.resolve(self.config.artifact or ""))
 
     def classify(self, units: list[Unit]) -> list[Decision]:
-        if any(not unit.text.strip() for unit in units):
-            raise ValueError(
-                "text classifier requires text for every unit; configure another processor"
-            )
-        probabilities = self.model.predict_proba([unit.text for unit in units])
-        positive_index = list(self.model.classes_).index(1)
+        # Blank and image-only pages are routine in PDFs; raising here would fail the
+        # whole asset and return its URL to the pool to be refetched.
+        texted = [unit for unit in units if unit.text.strip()]
+        scores = {}
+        if texted:
+            probabilities = self.model.predict_proba([unit.text for unit in texted])
+            positive_index = list(self.model.classes_).index(1)
+            scores = {
+                unit.id: float(row[positive_index])
+                for unit, row in zip(texted, probabilities, strict=True)
+            }
         return [
             Decision(
                 unit_id=unit.id,
-                score=float(row[positive_index]),
-                decision="accept" if row[positive_index] >= self.config.threshold else "reject",
+                score=scores[unit.id],
+                decision="accept" if scores[unit.id] >= self.config.threshold else "reject",
                 reason=f"TF-IDF logistic regression; threshold={self.config.threshold}",
             )
-            for unit, row in zip(units, probabilities, strict=True)
+            if unit.id in scores
+            else Decision(
+                unit_id=unit.id,
+                score=0.0,
+                decision="reject",
+                reason="no extractable text; TF-IDF cannot judge this unit",
+            )
+            for unit in units
         ]
 
 
