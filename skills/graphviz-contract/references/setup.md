@@ -8,7 +8,13 @@ Install Graphviz to render DOT diagrams:
 
 The checkpoint script also requires Python 3.9+ and Git.
 
-## Plan diagrams
+## Directory Setup
+
+Set up the `docs/graphviz-contracts` dir and the `DIAGRAMS.md`, `dot/`, `png/`, `metadata/` children.
+
+Before writing `DIAGRAMS.md`, read [Standard File Format](formats.md).
+
+## Plan which diagrams to build
 
 Survey the codebase and any existing diagrams, then propose a diagram plan to the user.
 Explain the coverage, level of detail, and how the architecture is split across diagrams.
@@ -17,12 +23,12 @@ Incorporate their feedback and agree on the plan before initializing diagrams.
 
 ## Initialize diagrams
 
-Create the dir layout described in SKILL.md using its naming convention, with matching DOT, PNG,
-metadata basenames, and router names. Render and visually review the PNGs. For each diagram,
-create metadata with its covered `paths`, then follow the staging and checkpoint workflow in
-SKILL.md. Stage the diagrams, metadata, and router, and run `check` until all health checks pass:
-naming, router entries, matching files, coverage paths, and checkpoints. For an existing contract
-directory, review and complete the existing artifacts.
+Create each diagram's DOT source and render and visually review its PNG, following
+[Writing and Editing](writing-and-editing.md). For each diagram, create metadata with its covered `paths`,
+then follow the staging and checkpoint workflow in [Diagram Syncing](diagram-syncing.md). Stage
+the diagrams, metadata, and router, and run `check` until all health checks pass: naming, router
+entries, matching files, coverage paths, and checkpoints. For an existing contract directory,
+review and complete the existing artifacts.
 
 ## Optional pre-commit hook
 
@@ -39,7 +45,7 @@ repos:
     hooks:
       - id: graphviz-contract
         name: Check diagram health
-        entry: <python> .agents/skills/graphiz-contract/scripts/graphviz_contract.py check
+        entry: <python> .agents/skills/graphviz-contract/scripts/graphviz_contract.py check
         language: system
         always_run: true
         pass_filenames: false
