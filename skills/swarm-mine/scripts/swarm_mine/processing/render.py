@@ -51,14 +51,14 @@ class PdfPageRenderer:
         Returns:
             One :class:`PageRender` per page, in 1-based page order.
         """
-        import fitz
+        import pymupdf
 
         out_dir.mkdir(parents=True, exist_ok=True)
         zoom = self._dpi / 72.0
         renders: list[PageRender] = []
-        with fitz.open(pdf_path) as document:
+        with pymupdf.open(pdf_path) as document:
             for index, page in enumerate(document):
-                pixmap = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+                pixmap = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom), alpha=False)
                 png_bytes = pixmap.tobytes("png")
                 image_sha256 = hashlib.sha256(png_bytes).hexdigest()
                 path = out_dir / f"{image_sha256}.png"

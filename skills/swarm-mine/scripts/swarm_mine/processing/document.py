@@ -14,9 +14,9 @@ def page_count(pdf_path: Path) -> int:
     Returns:
         Number of pages.
     """
-    import fitz
+    import pymupdf
 
-    with fitz.open(pdf_path) as document:
+    with pymupdf.open(pdf_path) as document:
         return int(document.page_count)
 
 

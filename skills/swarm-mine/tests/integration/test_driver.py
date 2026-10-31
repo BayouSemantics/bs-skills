@@ -5,7 +5,7 @@ import json
 import zipfile
 from pathlib import Path
 
-import fitz
+import pymupdf
 import pytest
 from swarm_mine.driver import MiningDriver
 from swarm_mine.fetch import FetchOutcome
@@ -58,7 +58,7 @@ def test_retains_local_assets_and_deduplicates_urls_and_bytes(
 def test_pdf_keeps_original_and_only_accepted_pages(
     workspace: Workspace, store: SqliteRegistry
 ) -> None:
-    document = fitz.open()
+    document = pymupdf.open()
     for text in ("target page", "irrelevant page"):
         document.new_page().insert_text((50, 50), text)
     body = document.tobytes()
